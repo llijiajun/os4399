@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>	
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type="text/css">
+    body {
+      margin: 0px auto;
+      width: 480;
+      padding: 0px;
+    }
+    canvas {
+      margin: 0px;
+      padding: 0px;
+      float:left;
+    }
+    .divcss5{ 
+      border:1px solid #F00;
+      width:480px;
+      height:800px;
+      border-color:white;
+      background-color:white;
+      float:left;
+      writing-mode:vertical-lr;
+      text-align:center;
+      line-height: 400px;
+      font-size:50px;
+    } 
+    </style>
+  </head>
+  <body>
+    <a href="dafeiji">
+    <div class="divcss5"><p>点击返回游戏大厅</p></div> 
+    </a>
+    <canvas id="canvas" width="480" height="800" float=left>
+    </canvas>
+    <a href="dafeiji">
+    <div class="divcss5"><p >点击返回游戏大厅</p></div> 
+    </a>
+    <script>
+
+      var canvas=document.getElementById("canvas");
+      var context=canvas.getContext('2d');
+      var width = canvas.width;
+      var height = canvas.height;
+      var mouse;
+      var stop;
+
+      var imgPlane = [ newImg("templates/image/plane0.png"), 
+                       newImg("templates/image/plane1.png"), 
+                       newImg("templates/image/plane2.png") ];
+      var imgMe = newImg("templates/image/me.png");
+      var imgBullet = newImg("templates/image/bullet.png");
+      var imgOver = newImg("templates/image/over.png");
+      var imgBg = [newImg("templates/image/bg1.jpg"), newImg("templates/image/bg2.jpg")];
+
+      function newImg(src){
+        var obj = new Image();
+        obj.src = src;
+        return obj;
+      }
+
+      function captureMouse(element) {
+        var mouse={x:width/2, y:height/2};
+
+        element.addEventListener('mousemove',function(event){
+          var x,y;
+          if ( event.pageX || event.pageY ) {
+            x = event.pageX;
+            y = event.pageY;
+          } else {
+            x = event.clientX + document.body.scrollLeft
+                + document.documentElement.scrollLeft;
+            y = event.clientY + document.body.scrollTop
+                + document.documentElement.scrollTop;
+          }
+
+          x -= element.offsetLeft;
+          y -= element.offsetTop;
+
+          mouse.x = x;
+          mouse.y = y;
+
+        }, false);
+
+        return mouse;
+      };
+
+      function GameObject() {
+
+        this.move = function (dx, dy) {
+          this.x += dx;
+          this.y += dy;
+        }
+
+        this.draw = function() {
+          context.drawImage(this.img, this.x, this.y); 
+        }
+
+        this.isOut = function(onlydown) {
+          return (this.y > height || (!onlydown && this.y < 0));
+        }
+
+        this.centerX = function() {
+          return this.img.width / 2 + this.x;
+        }
+
+        this.collide = function(another) {
+          return !(this.x + this.img.width < another.x || this.x > another.x + another.img.width
+                   || this.y + this.img.height < another.y || this.y > another.y + another.img.height);
+        }
+
+      }
+
+      Me.prototype = new GameObject();
+      function Me() {
+        this.x = this.y = 0;
+        this.img = imgMe;
+        this.run = function() {
+          this.x = mouse.x;
+          this.y = mouse.y;
+          for (var i = 0; i < planes.length; i++) {
+            if (this.collide(planes[i])) {
+              this.img = imgOver;
+              this.draw();
+              return false;
+            }
+          }
+          this.draw();
+          return true;
+        }
+      }
+
+      Plane.prototype = new GameObject();
+      function Plane(type) {
+        this.img = imgPlane[type];
+        this.x = randInt(0, width - this.img.width);
+        this.y = - this.img.height;
+        if (type == 0) {
+          this.lives = 1;
+          this.speed = randInt(3 * time.factor, 4 * time.factor);
+        } else if (type == 1) {
+          this.lives = 6;
+          this.speed = randInt(2 * time.factor, 3 * time.factor);
+        } else {
+          this.lives = 20;
+          this.speed = randInt(1 * time.factor, 2 * time.factor);
+        }
+        this.run = function() {
+          this.move(0, this.speed);
+          if (this.isOut(true)) return false;
+          for (var i = 0; i < bullets.length; i++) {
+            if (this.collide(bullets[i])) {
+              bullets.splice(i, 1);
+              i--;
+              this.lives--;
+            }
+            if (this.lives == 0) {
+              if (type == 0) score.add(1000);
+              if (type == 1) score.add(6000);
+              if (type == 2) score.add(20000);
+              return false;
+            }
+          }
+          this.draw();
+          return true;
+        }
+      }
+
+      Bullet.prototype = new GameObject();
+      function Bullet(x, y) {
+        this.x = x;
+        this.y = y;
+        this.img = imgBullet;
+        this.speed = 4;
+        this.run = function() {
+          this.move(0, -this.speed);
+          if (this.isOut()) return false;
+          this.draw();
+          return true;
+        }
+      }
+
+      function BackGround() {
+        this.x = this.y = 0;
+        this.cur = 0;
+        this.speed = 1;
+        this.run = function() {
+          this.y += this.speed;
+          if (this.y > height) {
+            this.y = 0;
+            this.cur = 1 - this.cur;
+          }
+          context.drawImage(imgBg[this.cur], this.x, this.y - height);
+          context.drawImage(imgBg[1 - this.cur], this.x, this.y);
+        }
+      }
+      
+      function GameTime() {
+        this.startTime = (new Date()).getTime();
+        this.cur = 0;
+        this.ms = 0;
+        this.factor = 1;
+
+        this.run = function () {
+          var s = parseInt((new Date()).getTime() - this.startTime) / 100;
+          this.ms = parseInt(s % 10);
+          this.cur = parseInt(s / 10);
+          this.factor = 1 + this.cur * 0.01;
+          context.font="30px Times";
+          context.fillStyle = "#fff";
+          context.fillText(this.cur + "." + this.ms, 400, 60);
+        }
+      }
+
+      function Score() {
+        this.num = 0;
+
+        this.add = function (delta) {
+          this.num += delta;
+        }
+
+        this.run = function () {
+          context.font="30px Times";
+          context.fillStyle = "#fff";
+          context.fillText(this.num, 30, 60);
+        }
+      }
+
+      var score;
+      var time;
+      var backGround;
+      var me;
+      var planes;
+      var bullets;
+      var bulletCreateCnt;
+
+      init();
+      function init () {
+        score = new Score();
+        time = new GameTime();
+        backGround = new BackGround();
+        me = new Me();
+        planes = new Array();
+        bullets = new Array();
+        bulletCreateCnt = 0;
+      }
+
+      function randInt (min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+      }
+
+      function run() {
+        var type = randInt(0, 3);
+        if (!randInt(0, (type + 1) * (type + 1) * 20 / time.factor))
+          planes.push(new Plane(type));
+        if (bulletCreateCnt == 15) {
+          bullets.push(new Bullet(me.centerX(), me.y));
+          bulletCreateCnt = 0;
+        } else bulletCreateCnt++;
+
+        backGround.run();
+
+        for (var i = 0; i < bullets.length; i++) {
+          if (!bullets[i].run()) {
+            bullets.splice(i, 1);
+            i--;
+          }
+        }
+
+        for (var i = 0; i < planes.length; i++) {
+          if (!planes[i].run()) {
+            planes.splice(i, 1);
+            i--;
+          }
+        }
+
+        if (!me.run()) {
+          gameover();
+        }
+        time.run();
+        score.run();
+      }
+
+      function gameover() {
+        clearInterval(stop);
+        var res = window.confirm("得分为: " + score.num + "\n继续游戏请按确定");
+        if (res) {
+          init();
+          stop = setInterval("run()",1000/100);
+        }
+      }
+
+      window.onload = function() {
+        mouse = captureMouse(canvas);
+        stop = setInterval("run()",1000/100);
+        me = new Me();
+      }
+
+    </script>
+  </body>
+</html>

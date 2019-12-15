@@ -9,20 +9,20 @@
   <title>202游戏大厅</title>
   
   <!-- PLUGINS CSS STYLE -->
-  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <link href="templates/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
   <!-- Bootstrap -->
-  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="templates/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="templates/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="templates/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="templates/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <link href="templates/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="templates/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="templates/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="templates/css/style.css" rel="stylesheet">
 
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -42,8 +42,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
+					<a class="navbar-brand" href="index">
+						<img src="templates/images/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -51,10 +51,10 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item active">
-								<a class="nav-link" href="index.html">主页</a>
+								<a class="nav-link" href="index">主页</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="dashboard.html">个人界面</a>
+								<a class="nav-link" href="zhuye">个人界面</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,9 +62,9 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="category.html">五子棋</a>
-									<a class="dropdown-item" href="single.html">打地鼠</a>
-									<a class="dropdown-item" href="store-single.html">21点</a>
+									<a class="dropdown-item" href="wuzi">五子棋</a>
+									<a class="dropdown-item" href="dadishu">打地鼠</a>
+									<a class="dropdown-item" href="dafeiji">打飞机</a>
 								</div>
 							</li>
 						</ul>
@@ -94,14 +94,14 @@
 					<div class="form-group">
 						<label for="username" class="col-sm-2 control-label">用户名</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="username" placeholder="username" required="required">
+							<input type="text" class="form-control" id="login-username" placeholder="username" required="required">
 						</div>
 					</div>
 					<!--密码框-->
 					<div class="form-group">
 						<label for="password" class="col-sm-2 control-label" >密码</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="password" placeholder="password" required="required">
+							<input type="password" class="form-control" id="login-password" placeholder="password" required="required">
 						</div>
 					</div>
 					<!--记住密码-->
@@ -141,21 +141,21 @@
 					<div class="form-group">
 						<label for="username" class="col-sm-4 control-label">用户名</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="username" placeholder="username" required="required">
+							<input type="text" class="form-control" id="sign-username" placeholder="username" required="required">
 						</div>
 					</div>
 					<!--密码框-->
 					<div class="form-group">
 						<label for="password" class="col-sm-4 control-label" >密码</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="password" placeholder="password" required="required">
+							<input type="password" class="form-control" id="sign-password" placeholder="password" required="required">
 						</div>
 					</div>
 					<!--记住密码-->
 					<div class="form-group">
 						<label for="password" class="col-sm-4 control-label" >确认密码</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" id="password" placeholder="password" required="required">
+							<input type="password" class="form-control" id="queren-password" placeholder="password" required="required">
 						</div>
 					</div>
 					<!--登陆按钮-->
@@ -195,15 +195,15 @@
 						<h2>最热门的游戏</h2>
 						<ul class="list-inline">
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-bed"></i> 五子棋</a></li>
+								<a href="wuzi"><i class="fa fa-bed"></i> 五子棋</a></li>
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-grav"></i> 心跳21点</a>
+								<a href="dadishu"><i class="fa fa-grav"></i> 打地鼠</a>
 							</li>
 							<li class="list-inline-item">
 								<a href=""><i class="fa fa-car"></i> 快乐问答</a>
 							</li>
 							<li class="list-inline-item">
-								<a href=""><i class="fa fa-cutlery"></i> 贪吃蛇</a>
+								<a href="dafeiji"><i class="fa fa-cutlery"></i> 打飞机</a>
 							</li>
 							<li class="list-inline-item">
 								<a href=""><i class="fa fa-coffee"></i> 翻转棋</a>
@@ -219,12 +219,12 @@
 							<!-- Store Search -->
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
-									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search for Fun">
+									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search1" placeholder="Search for Fun">
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-12">
 								<div class="block d-flex">
-									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search" placeholder="Search for Fun">
+									<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="search2" placeholder="Search for Fun">
 									<!-- Search Button -->
 									<button class="btn btn-main" onclick="alert('功能还未上线，敬请期待')">假装可以搜索</button>
 								</div>
@@ -267,8 +267,8 @@
 	<div class="card">
 		<div class="thumb-content">
 			<!-- <div class="price">$200</div> -->
-			<a href="">
-				<img class="card-img-top img-fluid" src="images/products/products-1.jpg" alt="Card image cap">
+			<a href="wuzi">
+				<img class="card-img-top img-fluid" src="templates/images/products/products-1.jpg" alt="Card image cap">
 			</a>
 		</div> 
 		<div class="card-body">
@@ -304,12 +304,12 @@
 	<div class="card">
 		<div class="thumb-content">
 			<!-- <div class="price">$200</div> -->
-			<a href="">
-				<img class="card-img-top img-fluid" src="images/products/products-2.jpg" alt="Card image cap">
+			<a href="dafeiji">
+				<img class="card-img-top img-fluid" src="templates/images/products/products-5.jpg" alt="Card image cap">
 			</a>
 		</div>
 		<div class="card-body">
-		    <h4 class="card-title"><a href="">心跳21点</a></h4>
+		    <h4 class="card-title"><a href="">打飞机</a></h4>
 		    <ul class="list-inline product-meta">
 		    	<li class="list-inline-item">
 		    		<a href=""><i class="fa fa-folder-open-o"></i>共有50人在线</a>
@@ -342,7 +342,7 @@
 		<div class="thumb-content">
 			<!-- <div class="price">$200</div> -->
 			<a href="">
-				<img class="card-img-top img-fluid" src="images/products/products-3.jpg" alt="Card image cap">
+				<img class="card-img-top img-fluid" src="templates/images/products/products-3.jpg" alt="Card image cap">
 			</a>
 		</div>
 		<div class="card-body">
@@ -403,8 +403,8 @@
 								<h4>五子棋</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>17</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li><a href="wuzi">在线人数 <span>17</span></a></li>
+								<li><a href="wuzi">评分 <span>4</span></a></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -548,19 +548,19 @@
 </footer>
 
   <!-- JAVASCRIPTS -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="plugins/tether/js/tether.min.js"></script>
-  <script src="plugins/raty/jquery.raty-fa.js"></script>
-  <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+  <script src="templates/plugins/jquery/jquery.min.js"></script>
+  <script src="templates/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="templates/plugins/tether/js/tether.min.js"></script>
+  <script src="templates/plugins/raty/jquery.raty-fa.js"></script>
+  <script src="templates/plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="templates/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="templates/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="templates/plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="templates/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="templates/plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="templates/plugins/smoothscroll/SmoothScroll.min.js"></script>
   
-  <script src="js/scripts.js"></script>
+  <script src="templates/js/scripts.js"></script>
 
 </body>
 

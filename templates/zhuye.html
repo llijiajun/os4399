@@ -6,26 +6,26 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Calssimax</title>
+  <title>主页</title>
   
   <!-- PLUGINS CSS STYLE -->
-  <link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+  <link href="templates/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet">
   <!-- Bootstrap -->
-  <link href="plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="templates/plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome -->
-  <link href="plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="templates/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
   <!-- Owl Carousel -->
-  <link href="plugins/slick-carousel/slick/slick.css" rel="stylesheet">
-  <link href="plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
+  <link href="templates/plugins/slick-carousel/slick/slick.css" rel="stylesheet">
+  <link href="templates/plugins/slick-carousel/slick/slick-theme.css" rel="stylesheet">
   <!-- Fancy Box -->
-  <link href="plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
-  <link href="plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
-  <link href="plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+  <link href="templates/plugins/fancybox/jquery.fancybox.pack.css" rel="stylesheet">
+  <link href="templates/plugins/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+  <link href="templates/plugins/seiyria-bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
   <!-- CUSTOM CSS -->
-  <link href="css/style.css" rel="stylesheet">
+  <link href="templates/css/style.css" rel="stylesheet">
 
   <!-- FAVICON -->
-  <link href="img/favicon.png" rel="shortcut icon">
+  <link href="templates/img/favicon.png" rel="shortcut icon">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,8 +43,8 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
-					<a class="navbar-brand" href="index.html">
-						<img src="images/logo.png" alt="">
+					<a class="navbar-brand" href="index">
+						<img src="templates/images/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -52,53 +52,133 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item active">
-								<a class="nav-link" href="index.html">Home</a>
+								<a class="nav-link" href="index">主页</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="dashboard.html">Dashboard</a>
+								<a class="nav-link" href="zhuye">个人界面</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Pages <span><i class="fa fa-angle-down"></i></span>
+									收藏的游戏 <span><i class="fa fa-angle-down"></i></span>
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="category.html">Category</a>
-									<a class="dropdown-item" href="single.html">Single Page</a>
-									<a class="dropdown-item" href="store-single.html">Store Single</a>
-									<a class="dropdown-item" href="dashboard.html">Dashboard</a>
-									<a class="dropdown-item" href="user-profile.html">User Profile</a>
-									<a class="dropdown-item" href="submit-coupon.html">Submit Coupon</a>
-									<a class="dropdown-item" href="blog.html">Blog</a>
-									<a class="dropdown-item" href="single-blog.html">Single Post</a>
-								</div>
-							</li>
-							<li class="nav-item dropdown dropdown-slide">
-								<a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									Listing <span><i class="fa fa-angle-down"></i></span>
-								</a>
-								<!-- Dropdown list -->
-								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="#">Action</a>
-									<a class="dropdown-item" href="#">Another action</a>
-									<a class="dropdown-item" href="#">Something else here</a>
+									<a class="dropdown-item" href="wuzi">五子棋</a>
+									<a class="dropdown-item" href="dadishu">打地鼠</a>
+									<a class="dropdown-item" href="dafeiji">打飞机</a>
 								</div>
 							</li>
 						</ul>
-						<ul class="navbar-nav ml-auto mt-10">
-							<li class="nav-item">
-								<a class="nav-link login-button" href="index.html">Login</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link add-button" href="#"><i class="fa fa-plus-circle"></i> Add Listing</a>
-							</li>
-						</ul>
+						
+<!-- 按钮触发模态框 -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#log-in">
+    登陆
+</button>
+<!-- 按钮触发模态框 -->
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#sign-up" style="background-color:#FFEEBA;border-color:#FFEEBA;color:#000000">
+    注册
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="log-in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!--登陆框头部-->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+               </button>
+			</div>
+			<!--登陆框中间部分(from表单)-->
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<!--用户框-->
+					<div class="form-group">
+						<label for="username" class="col-sm-2 control-label">用户名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="login-username" placeholder="username" required="required">
+						</div>
+					</div>
+					<!--密码框-->
+					<div class="form-group">
+						<label for="password" class="col-sm-2 control-label" >密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="login-password" placeholder="password" required="required">
+						</div>
+					</div>
+					<!--记住密码-->
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox"> 记住密码
+								</label>
+							</div>
+						</div>
+					</div>
+					<!--登陆按钮-->
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">登录</button>
+						</div>
+					</div>
+				</form>
+		</div>	
+	</div>
+</div>
+</div>
+<div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!--登陆框头部-->
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    ×
+               </button>
+			</div>
+			<!--登陆框中间部分(from表单)-->
+			<div class="modal-body">
+				<form class="form-horizontal" role="form">
+					<!--用户框-->
+					<div class="form-group">
+						<label for="username" class="col-sm-4 control-label">用户名</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" id="sign-username" placeholder="username" required="required">
+						</div>
+					</div>
+					<!--密码框-->
+					<div class="form-group">
+						<label for="password" class="col-sm-4 control-label" >密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="sign-password" placeholder="password" required="required">
+						</div>
+					</div>
+					<!--记住密码-->
+					<div class="form-group">
+						<label for="password" class="col-sm-4 control-label" >确认密码</label>
+						<div class="col-sm-10">
+							<input type="password" class="form-control" id="queren-password" placeholder="password" required="required">
+						</div>
+					</div>
+					<!--登陆按钮-->
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-default">注册</button>
+						</div>
+					</div>
+				</form>
+		</div>	
+	</div>
+</div>
+</div>
+
+
 					</div>
 				</nav>
 			</div>
 		</div>
 	</div>
 </section>
+
 <!--==================================
 =            User Profile            =
 ===================================-->
@@ -415,19 +495,19 @@
 </footer>
 
   <!-- JAVASCRIPTS -->
-  <script src="plugins/jquery/jquery.min.js"></script>
-  <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="plugins/tether/js/tether.min.js"></script>
-  <script src="plugins/raty/jquery.raty-fa.js"></script>
-  <script src="plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="plugins/smoothscroll/SmoothScroll.min.js"></script>
+  <script src="templates/plugins/jquery/jquery.min.js"></script>
+  <script src="templates/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="templates/plugins/tether/js/tether.min.js"></script>
+  <script src="templates/plugins/raty/jquery.raty-fa.js"></script>
+  <script src="templates/plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="templates/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="templates/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="templates/plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="templates/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="templates/plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="templates/plugins/smoothscroll/SmoothScroll.min.js"></script>
   
-  <script src="js/scripts.js"></script>
+  <script src="templates/js/scripts.js"></script>
 
 </body>
 
