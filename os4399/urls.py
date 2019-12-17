@@ -18,11 +18,12 @@ from django.urls import path
 from django.conf.urls import url
 from . import view
 urlpatterns = [
-	url(r'^$',view.Index),
-	url(r'^index$',view.Index),
-	url(r'^wuzi$',view.Wuzi),
+    url(r'^$',view.Index),
+    url(r'^index$',view.Index),
+    url(r'^wuzi$',view.Wuzi),
     url(r'^zhuye$',view.zhuye),
     url(r'^dadishu$',view.dadishu),
     url(r'^dafeiji$',view.dafeiji),
     url(r'^feiji$',view.feiji),
+    url(r'^chess$',view.chess),
 ]

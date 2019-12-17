@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<nav class="navbar navbar-expand-lg  navigation">
-					<a class="navbar-brand" href="index">
+					<a class="navbar-brand" href="index?user_id={{user_id}}">
 						<img src="templates/images/logo.png" alt="">
 					</a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,10 +51,10 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav ml-auto main-nav ">
 							<li class="nav-item active">
-								<a class="nav-link" href="index">主页</a>
+								<a class="nav-link" href="index?user_id={{user_id}}">主页</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="zhuye">个人界面</a>
+								<a class="nav-link" href="zhuye?user_id={{user_id}}">个人界面</a>
 							</li>
 							<li class="nav-item dropdown dropdown-slide">
 								<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -62,14 +62,15 @@
 								</a>
 								<!-- Dropdown list -->
 								<div class="dropdown-menu dropdown-menu-right">
-									<a class="dropdown-item" href="wuzi">五子棋</a>
-									<a class="dropdown-item" href="dadishu">打地鼠</a>
-									<a class="dropdown-item" href="dafeiji">打飞机</a>
+									<a class="dropdown-item" href="wuzi?user_id={{user_id}}">五子棋</a>
+									<a class="dropdown-item" href="dadishu?user_id={{user_id}}">打地鼠</a>
+									<a class="dropdown-item" href="dafeiji?user_id={{user_id}}">打飞机</a>
 								</div>
 							</li>
 						</ul>
 						
 <!-- 按钮触发模态框 -->
+<div id="login-part">
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#log-in">
     登陆
 </button>
@@ -117,7 +118,7 @@
 					<!--登陆按钮-->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">登录</button>
+						<button type="button" class="btn btn-default" id="login_button" onclick="loginf()">登录</button>
 						</div>
 					</div>
 				</form>
@@ -139,9 +140,9 @@
 				<form class="form-horizontal" role="form">
 					<!--用户框-->
 					<div class="form-group">
-						<label for="username" class="col-sm-4 control-label">用户名</label>
+						<label for="username" class="col-sm-4 control-label" >用户名</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="sign-username" placeholder="username" required="required">
+							<input type="text" class="form-control" id="sign-username" placeholder="username" required="required" id="sign-username">
 						</div>
 					</div>
 					<!--密码框-->
@@ -161,7 +162,7 @@
 					<!--登陆按钮-->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">注册</button>
+						<button type="button" class="btn btn-default" id="sign_button" onclick="signup()">注册</button>
 						</div>
 					</div>
 				</form>
@@ -169,7 +170,7 @@
 	</div>
 </div>
 </div>
-
+</div>
 
 					</div>
 				</nav>
@@ -195,15 +196,15 @@
 						<h2>最热门的游戏</h2>
 						<ul class="list-inline">
 							<li class="list-inline-item">
-								<a href="wuzi"><i class="fa fa-bed"></i> 五子棋</a></li>
+								<a href="wuzi?user_id={{user_id}}"><i class="fa fa-bed"></i> 五子棋</a></li>
 							<li class="list-inline-item">
-								<a href="dadishu"><i class="fa fa-grav"></i> 打地鼠</a>
+								<a href="dadishu?user_id={{user_id}}"><i class="fa fa-grav"></i> 打地鼠</a>
 							</li>
 							<li class="list-inline-item">
 								<a href=""><i class="fa fa-car"></i> 快乐问答</a>
 							</li>
 							<li class="list-inline-item">
-								<a href="dafeiji"><i class="fa fa-cutlery"></i> 打飞机</a>
+								<a href="dafeiji?user_id={{user_id}}"><i class="fa fa-cutlery"></i> 打飞机</a>
 							</li>
 							<li class="list-inline-item">
 								<a href=""><i class="fa fa-coffee"></i> 翻转棋</a>
@@ -267,12 +268,12 @@
 	<div class="card">
 		<div class="thumb-content">
 			<!-- <div class="price">$200</div> -->
-			<a href="wuzi">
+			<a href="wuzi?user_id={{user_id}}">
 				<img class="card-img-top img-fluid" src="templates/images/products/products-1.jpg" alt="Card image cap">
 			</a>
 		</div> 
 		<div class="card-body">
-		    <h4 class="card-title"><a href="">五子棋</a></h4>
+		    <h4 class="card-title"><a href="wuzi?user_id={{user_id}}">五子棋</a></h4>
 		    <ul class="list-inline product-meta">
 		    	<li class="list-inline-item">
 		    		<a href=""><i class="fa fa-folder-open-o"></i>有100人在线</a>
@@ -304,7 +305,7 @@
 	<div class="card">
 		<div class="thumb-content">
 			<!-- <div class="price">$200</div> -->
-			<a href="dafeiji">
+			<a href="dafeiji?user_id={{user_id}}">
 				<img class="card-img-top img-fluid" src="templates/images/products/products-5.jpg" alt="Card image cap">
 			</a>
 		</div>
@@ -334,7 +335,7 @@
 
 
 
-			</div><div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
+			</div>
 			<div class="col-sm-12 col-lg-4">
 				<!-- product card -->
 <div class="product-item bg-light">
@@ -403,7 +404,7 @@
 								<h4>五子棋</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="wuzi">在线人数 <span>17</span></a></li>
+								<li><a href="wuzi?user_id={{user_id}}">在线人数 <span>17</span></a></li>
 								<li><a href="wuzi">评分 <span>4</span></a></li>
 							</ul>
 						</div>
@@ -416,8 +417,8 @@
 								<h4>21点</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>32</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>32</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -429,8 +430,8 @@
 								<h4>贪吃蛇</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>92</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>92</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -442,8 +443,8 @@
 								<h4>打地鼠</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>92</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>92</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -455,8 +456,8 @@
 								<h4>斗地主</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>43</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>43</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -468,8 +469,8 @@
 								<h4>飞行棋</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>43</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>43</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -481,8 +482,8 @@
 								<h4>你问我答</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>933</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>933</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -494,8 +495,8 @@
 								<h4>快乐聊天室</h4>
 							</div>
 							<ul class="category-list" >
-								<li><a href="category.html">在线人数 <span>932</span></a></li>
-								<li><a href="category.html">评分 <span>4</span></a></li>
+								<li>在线人数 <span>932</span></li>
+								<li>评分 <span>4</span></li>
 							</ul>
 						</div>
 					</div> <!-- /Category List -->
@@ -547,21 +548,43 @@
     </div>
 </footer>
 
-  <!-- JAVASCRIPTS -->
-  <script src="templates/plugins/jquery/jquery.min.js"></script>
-  <script src="templates/plugins/jquery-ui/jquery-ui.min.js"></script>
-  <script src="templates/plugins/tether/js/tether.min.js"></script>
-  <script src="templates/plugins/raty/jquery.raty-fa.js"></script>
-  <script src="templates/plugins/bootstrap/dist/js/popper.min.js"></script>
-  <script src="templates/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="templates/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
-  <script src="templates/plugins/slick-carousel/slick/slick.min.js"></script>
-  <script src="templates/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
-  <script src="templates/plugins/fancybox/jquery.fancybox.pack.js"></script>
-  <script src="templates/plugins/smoothscroll/SmoothScroll.min.js"></script>
-  
-  <script src="templates/js/scripts.js"></script>
+<!-- JAVASCRIPTS -->
+<script src="templates/plugins/jquery/jquery.min.js"></script>
+<script src="templates/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="templates/plugins/tether/js/tether.min.js"></script>
+<script src="templates/plugins/raty/jquery.raty-fa.js"></script>
+<script src="templates/plugins/bootstrap/dist/js/popper.min.js"></script>
+<script src="templates/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="templates/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script src="templates/plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="templates/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="templates/plugins/fancybox/jquery.fancybox.pack.js"></script>
+<script src="templates/plugins/smoothscroll/SmoothScroll.min.js"></script>
 
+<script src="templates/js/scripts.js"></script>
+<script type="text/javascript">
+function loginf(){
+	window.location.href='index?user_id='+$("#login-username").val();
+};
+
+function signup(){
+	$.ajax({
+		type:"POST",
+		url:"http://127.0.0.1:9051/v1/user/register",
+		dataType:"JSON",
+		data:{"username":$("#sign-username").val()},
+		success:function(result){
+			console.log(result);
+			alert($('#sign-username').val());
+			window.location.href='index?user_id='+$("#sign-username").val();
+		},
+		error:function(result){
+			alert("注册失败");
+		}
+	});
+	
+}
+</script>
 </body>
 
 </html>

@@ -13,19 +13,50 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def Index(request):
-	return render(request,'../templates/index.html')
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/index.html',{'user_id':""})
+	else:
+		return render(request,'../templates/index.html',{'user_id':userid[0]})
 
 def Wuzi(request):
-	return render(request,'../templates/wuzi.html')
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/wuzi.html',{'user_id':""})
+	else:
+		return render(request,'../templates/wuzi.html',{'user_id':userid[0]})
 
 def zhuye(request):
-	return render(request,'../templates/zhuye.html')
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/zhuye.html',{'user_id':""})
+	else:
+		return render(request,'../templates/zhuye.html',{'user_id':userid[0]})
 
 def dadishu(request):
-	return render(request,'../templates/dadishu.html')
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/dadishu.html',{'user_id':""})
+	else:
+		return render(request,'../templates/dadishu.html',{'user_id':userid[0]})
 
 def dafeiji(request):
-	return render(request,'../templates/dafeiji.html')
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/dafeiji.html',{'user_id':""})
+	else:
+		return render(request,'../templates/dafeiji.html',{'user_id':userid[0]})
 
 def feiji(request):
-	return render(request,'../templates/feiji.html')
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/feiji.html',{'user_id':""})
+	else:
+		return render(request,'../templates/feiji.html',{'user_id':userid[0]})
+
+def chess(request):
+	userid=request.GET.getlist('user_id')
+	if len(userid)==0:
+		return render(request,'../templates/chess.html',{'user_id':""})
+	else:
+		return render(request,'../templates/chess.html',{'user_id':userid[0],'room_id':request.GET.getlist('room_id')[0]})

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+</html>
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        #begin{ 
+            border:1px solid #F00;
+            width:100px;
+            height:300px;
+            border-color:yellow;
+            background-color:yellow;
+            position:relative;
+            left:800px;
+            top:-600px;
+            font-size:50px;
+        } 
+        #prepare{ 
+            border:1px solid #F00;
+            width:100px;
+            height:250px;
+            border-color:yellow;
+            background-color:yellow;
+            position:relative;
+            left:800px;
+            top:-700px;
+            font-size:50px;
+        } 
+        </style>
+    </head>
+    <body>
+    <script src="templates/plugins/jquery/jquery.min.js"></script>
+<script src="templates/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="templates/plugins/tether/js/tether.min.js"></script>
+<script src="templates/plugins/raty/jquery.raty-fa.js"></script>
+<script src="templates/plugins/bootstrap/dist/js/popper.min.js"></script>
+<script src="templates/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="templates/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+<script src="templates/plugins/slick-carousel/slick/slick.min.js"></script>
+<script src="templates/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+<script src="templates/plugins/fancybox/jquery.fancybox.pack.js"></script>
+<style>
+.black-cell{
+    width:50px;
+    height:50px;
+    background: #000;
+    position: absolute;
+    top:0;
+    left:0;
+}
+</style>
+    <h3>五子棋</h3>
+    <div id="qipan" style="width:750px;height:750px;border:1px solid #aaa;background:#fff; position: relative;"></div>
+    <div id="prepare" onclick="prepare()"><p>玩家点击准备</p></div> 
+    <div id="begin" onclick="begin()"><p>房主点击开始游戏</p></div>
+    
+    
+</body>
+<script>
+var who=1;
+var MyId;
+var status=0;
+
+// status 表示当前状态0为无准备状态， 1为准备中，2为游戏中
+function prepare(){
+    if(status==0){
+        $("#prepare").children().text("点击取消准备");
+        status=1;
+    }else if(status==1){
+        $("#prepare").children().text("玩家点击准备");
+        status=0;
+    }else{}
+}
+function begin(){
+    if(MyId==1 && status!=2){
+        $.ajax({
+            type:"POST",
+            url:"http://10.77.70.135:9051/v1/room/{{room_id}}/startgame",
+            success:function(result){
+                if(true){
+                    alert("还有人没准备！");
+                }else{
+                    alert("开始游戏！");
+                }
+            },error:function(result){
+                alert("网络有问题！");
+            }
+        });
+    }else{
+        alert("别乱点！");
+    }
+}
+
+var frag = document.createDocumentFragment();
+var chess = new Array();  //先声明一维
+for(var k=0;k<15;k++){    //一维长度为i,i为变量，可以根据实际情况改变
+    chess[k]=new Array();  //声明二维，每一个一维数组里面的一个元素都是一个数组；
+        for(var j=0;j<15;j++){   //一维数组里面每个元素数组可以包含的数量p，p也是一个变量；
+            chess[k][j]=0;    //这里将变量初始化，我这边统一初始化为空，后面在用所需的值覆盖里面的值
+    }
+}
+for (var line = 0; line < 15; line++) {
+    for (var column = 0; column < 15; column++) {
+            var div =  document.createElement("div");
+            var bigImg = document.createElement("img");     //创建一个img元素
+            bigImg.src="templates/images/yes.png";
+            div.setAttribute("class", "black-cell");
+            bigImg.setAttribute("id","chess"+line+","+column);
+            bigImg.setAttribute("class","nochess");
+            div.setAttribute("onclick","send("+line+","+column+")");
+            div.appendChild(bigImg);
+            div.style.top = (line*50) + "px";
+            div.style.left = (column*50) + "px";
+            frag.appendChild(div);
+    }
+}
+document.getElementById("qipan").appendChild(frag);
+function update(new_chess){
+    for(var k=0;k<15;k++){
+        for(var j=0;j<15;j++){
+            if(chess[k][j]!=new_chess[k][j]){
+                var img = document.getElementById("chess"+k+","+j);
+                if(new_chess[k][j]==1){
+                    img.setAttribute("class","bchess");
+                    img.src="templates/images/b.png";
+                }else if(new_chess[k][j]==2){
+                    img.setAttribute("class","wchess");
+                    img.src="templates/images/w.png";
+                }
+            }
+        }
+    }
+}
+</script>
+<script type="text/javascript">
+
+
+
+//轮询
+c=window.setInterval(Request, 100 * 5);
+var i = 1;
+ 
+function Request() {
+console.log("轮训任务=================>" + i++);
+//这里写自己的ajax请求访问后台就可以了
+if(status==0){
+
+}else if(status==1){
+
+}else if(status==0){
+
+}
+
+}
+
+
+window.clearInterval(c);
+
+$.ajax({
+    type:"GET",
+    url:"http://10.77.70.135:9051/v1/room/{{room_id}}/status",
+    success:function(result){
+        ar=result['data']['chess_board'][0][0];
+        update(result['data']['chess_board']);
+    },
+    error:function(){
+        alert("check the internet!");
+    }
+})
+function send(x,y){
+    if(who==MyId){
+        $.ajax({
+            type:"POST",
+            url:"http://10.77.70.135:9051/v1/room/dropchess",
+            dataType:"JSON",
+            data:{"user_id":{{user_id}},
+                    "room_id":{{room_id}},
+                    "x":x,
+                    "y":y},
+            success:function(result){
+                if(who==1){
+                    who=2;
+                }else{
+                    who=1;
+                }
+            },
+            error:function(){
+                alert("check the internet!");
+            }
+        })
+    }else{
+        alert("不是你的回合！");
+    }
+}
+</script>
+<!--script>
+    var socket;
+    var get_name_flag=0;
+    var who=1;
+    var MyId;
+    var feedback;
+    function connect() {
+        var host = "ws://" + $("serverIP").value + ":" + $("serverPort").value + "/"
+        socket = new WebSocket(host);
+        try {
+
+            socket.onopen = function (msg) {
+                $("btnConnect").disabled = true;
+                alert("连接成功！");
+
+            };
+            socket.onmessage = function (msg) {
+                feedback=msg.data;
+                if (typeof msg.data == "string") {
+                    if(get_name_flag==0){
+                        MyId=parseInt(feedback);
+                        get_name_flag=1
+                    }else{
+                        //displayContent(msg.data);
+                        if(feedback.split(":")[0]=="gameover"){
+                            alert("GAME OVER : Winner is player"+feedback.split(":")[1]);
+                            socket.close();
+                            return;
+                        }
+                        if(parseInt(feedback.split(":")[0])!=MyId){
+                            var tempx=parseInt(feedback.split(":")[1].split(",")[0])
+                            var tempy=parseInt(feedback.split(":")[1].split(",")[1])
+                            change(tempx,tempy)
+                        }
+                    }
+                }
+                else {
+                    alert("非文本消息");
+                }
+            };
+            socket.onclose = function (msg) { alert("socket closed!") };
+        }
+        catch (ex) {
+            log(ex);
+        }
+    }
+    function change(line,column){
+        var img = document.getElementById("chess"+line+","+column);
+        if(who==0){
+           img.src="templates/images/b.png";
+           img.setAttribute("class","bchess");
+           who=1;
+        }else if(who==1){
+           if(img.getAttribute("class")!="nochess"){
+               alert(img.getAttribute("class")+"有棋子，请换个地方下！")
+           }else{
+               img.src="templates/images/w.png";
+               img.setAttribute("class","wchess");
+               who=2;
+           }
+        }else if(who==2){
+           if(img.getAttribute("class")!="nochess"){
+               alert(img.getAttribute("class")+"有棋子，请换个地方下！")
+           }else{
+               img.src="templates/images/b.png";
+               img.setAttribute("class","hchess");
+               who=1;
+           }
+        }
+    }
+    function send(x,y) {
+        if(who==MyId){
+            change(x,y)
+            socket.send(""+x+","+y);
+        }else{
+            alert("不是你的回合！");
+        }
+    }
+    window.onbeforeunload = function () {
+        try {
+            socket.close();
+            socket = null;
+        }
+        catch (ex) {
+        }
+    };
+
+    function $(id) { return document.getElementById(id); }
+
+    function onkey(event) { if (event.keyCode == 13) { send(); } }
+</script-->
+</html>
