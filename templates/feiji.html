@@ -5,6 +5,17 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="templates/plugins/jquery/jquery.min.js"></script>
+  <script src="templates/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="templates/plugins/tether/js/tether.min.js"></script>
+  <script src="templates/plugins/raty/jquery.raty-fa.js"></script>
+  <script src="templates/plugins/bootstrap/dist/js/popper.min.js"></script>
+  <script src="templates/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="templates/plugins/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+  <script src="templates/plugins/slick-carousel/slick/slick.min.js"></script>
+  <script src="templates/plugins/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+  <script src="templates/plugins/fancybox/jquery.fancybox.pack.js"></script>
+  <script src="templates/plugins/smoothscroll/SmoothScroll.min.js"></script>
     <style type="text/css">
     body {
       margin: 0px auto;
@@ -27,19 +38,56 @@
       text-align:center;
       line-height: 400px;
       font-size:50px;
-    } 
+    }
+    #fenshu{
+      border:1px solid #F00;
+      width:300px;
+      height:100px;
+      border-color:white;
+      background-color:white;
+      float:left;
+      text-align:center;
+      line-height: 60px;
+      font-size:30px;
+    }
     </style>
   </head>
   <body>
-    <a href="dafeiji">
+    <a href="dafeiji?={{user_id}}">
     <div class="divcss5"><p>点击返回游戏大厅</p></div> 
     </a>
     <canvas id="canvas" width="480" height="800" float=left>
     </canvas>
     <a href="dafeiji">
-    <div class="divcss5"><p >点击返回游戏大厅</p></div> 
+      <div id="fenshu">
+      </div> 
     </a>
     <script>
+      function addscore(scorelist){
+        var vcurrent = document.getElementById("fenshu");
+        var appendroom='<table border="1">';
+        console.log(scorelist.length);
+        for(var i=0;i<scorelist.length;i++){
+          alert(scorelist[i]);
+          appendroom+='<tr><td>'+scorelist[i][1]+'</td><td>'+scorelist[i][0]+'</td></tr>';
+          //alert(scorelist[i][1]);
+          //alert(scorelist[i][0]);
+        }
+        appendroom+="</table>"
+        vcurrent.innerHTML=appendroom;
+      }
+      function freshscore(){
+        var rr;
+        /*$.ajax({
+          type:"POST",
+          url:"score",
+          async: true,
+          success:function(result){
+            addscore(result["data"]);
+          }
+        });*/
+      }
+      window.onload =freshscore();
 
       var canvas=document.getElementById("canvas");
       var context=canvas.getContext('2d');
@@ -287,6 +335,18 @@
       function gameover() {
         clearInterval(stop);
         var res = window.confirm("得分为: " + score.num + "\n继续游戏请按确定");
+        /*
+        $.ajax({
+          type:"POST",
+          //url:"jifen",
+          dataType:"json",
+          async: true,
+          data:{"user_id":"{{user_id}}","score":score.num},
+          success:function(result){
+            console.log("成功");
+            freshscore();
+          }
+        });*/
         if (res) {
           init();
           stop = setInterval("run()",1000/100);
@@ -300,5 +360,6 @@
       }
 
     </script>
+      
   </body>
 </html>

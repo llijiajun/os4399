@@ -73,12 +73,16 @@ function prepare(){
                     alert("您只可以观战");
                 }else if(result["data"]["flag"]==1){
                     MyId=1;
+                    clearchess();
                     alert("您将执黑");
                     $("#prepare").children().text("点击取消准备");
+                    c=window.setInterval(Request, 100 * 5);
                 }else if(result["data"]["flag"]==2){
                     MyId=2;
+                    clearchess();
                     alert("您将执白");
                     $("#prepare").children().text("点击取消准备");
+                    c=window.setInterval(Request, 100 * 5);
                 }
             },error:function(result){
                 alert("网络有问题！");
@@ -94,11 +98,14 @@ function prepare(){
             success:function(result){
                 $("#prepare").children().text("玩家点击准备");
                 status=0;
+                window.clearInterval(c);
             },error:function(result){
                 alert("网络有问题！");
             }
         });
-    }else{}
+    }else{
+
+    }
 }
 function begin(){
     if(MyId==1 && status!=2)
@@ -157,13 +164,22 @@ function update(new_chess){
         }
     }
 }
+function clearchess(){
+    for(var k=0;k<15;k++){
+        for(var j=0;j<15;j++){
+            var img = document.getElementById("chess"+k+","+j);
+            img.setAttribute("class","nochess");
+            img.src="templates/images/yes.png";
+        }
+    }
+}
 </script>
 <script type="text/javascript">
 
 
 
 //轮询
-c=window.setInterval(Request, 100 * 5);
+
 var i = 1;
  
 function Request() {
@@ -200,6 +216,9 @@ if(status==0){
                 }
                 window.clearInterval(c);
                 alert(re);
+                $("#prepare").children().text("玩家点击准备");
+                status=0;
+
             }
             update(result['data']['chess_board']);
             who=result['data']['turn'];

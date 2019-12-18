@@ -26,4 +26,6 @@ urlpatterns = [
     url(r'^dafeiji$',view.dafeiji),
     url(r'^feiji$',view.feiji),
     url(r'^chess$',view.chess),
+    url(r'^jifen$',view.jifen),
+    url(r'^score$',view.score),
 ]
