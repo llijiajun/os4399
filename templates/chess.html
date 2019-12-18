@@ -63,31 +63,58 @@ var status=0;
 // status 表示当前状态0为无准备状态， 1为准备中，2为游戏中
 function prepare(){
     if(status==0){
-        $("#prepare").children().text("点击取消准备");
-        status=1;
-    }else if(status==1){
-        $("#prepare").children().text("玩家点击准备");
-        status=0;
-    }else{}
-}
-function begin(){
-    if(MyId==1 && status!=2){
         $.ajax({
             type:"POST",
-            url:"http://10.77.70.135:9051/v1/room/{{room_id}}/startgame",
+            url:"http://10.77.70.135:9051/v1/room/joingame",
+            dataType:"JSON",
+            data:{"user_id":"{{user_id}}","room_id":"{{room_id}}"},
             success:function(result){
-                if(true){
-                    alert("还有人没准备！");
-                }else{
-                    alert("开始游戏！");
+                if(result["data"]["flag"]==-1){
+                    alert("您只可以观战");
+                }else if(result["data"]["flag"]==1){
+                    MyId=1;
+                    alert("您将执黑");
+                    $("#prepare").children().text("点击取消准备");
+                }else if(result["data"]["flag"]==2){
+                    MyId=2;
+                    alert("您将执白");
+                    $("#prepare").children().text("点击取消准备");
                 }
             },error:function(result){
                 alert("网络有问题！");
             }
         });
-    }else{
-        alert("别乱点！");
-    }
+        status=1;
+    }else if(status==1){
+        $.ajax({
+            type:"POST",
+            url:"http://10.77.70.135:9051/v1/room/quitgame",
+            dataType:"JSON",
+            data:{"user_id":"{{user_id}}","room_id":"{{room_id}}"},
+            success:function(result){
+                $("#prepare").children().text("玩家点击准备");
+                status=0;
+            },error:function(result){
+                alert("网络有问题！");
+            }
+        });
+    }else{}
+}
+function begin(){
+    if(MyId==1 && status!=2)
+    $.ajax({
+        type:"POST",
+        url:"http://10.77.70.135:9051/v1/room/{{room_id}}/startgame",
+        success:function(result){
+            if(result["data"]["flag"]==0){
+                alert("还有人没准备");
+            }else if(result["data"]["flag"]==1){
+                alert("开始游戏！");
+            }
+        },error:function(result){
+            alert("网络有问题！");
+        }
+    });
 }
 
 var frag = document.createDocumentFragment();
@@ -145,22 +172,56 @@ console.log("轮训任务=================>" + i++);
 if(status==0){
 
 }else if(status==1){
-
-}else if(status==0){
-
+    $.ajax({
+        type:"GET",
+        url:"http://10.77.70.135:9051/v1/room/{{room_id}}/status",
+        success:function(result){
+            if(result['data']["is_gaming"]){
+                update(result['data']['chess_board']);
+                who=result['data']['turn'];
+                status=2;
+            }
+        },
+        error:function(){
+            alert("check the internet!");
+        }
+    });
+}else if(status==2){
+    $.ajax({
+        type:"GET",
+        url:"http://10.77.70.135:9051/v1/room/{{room_id}}/status",
+        success:function(result){
+            if(result['data']['is_end']){
+                re="游戏结束获胜者为";
+                if(result['data']['winner']==1){
+                    re+="黑方";
+                }else{
+                    re+="白方";
+                }
+                window.clearInterval(c);
+                alert(re);
+            }
+            update(result['data']['chess_board']);
+            who=result['data']['turn'];
+        },
+        error:function(){
+            alert("check the internet!");
+        }
+    });
 }
 
 }
 
 
-window.clearInterval(c);
+//window.clearInterval(c);
 
 $.ajax({
     type:"GET",
     url:"http://10.77.70.135:9051/v1/room/{{room_id}}/status",
     success:function(result){
-        ar=result['data']['chess_board'][0][0];
-        update(result['data']['chess_board']);
+        if(result["data"]["is_gaming"]){
+            update(result['data']['chess_board']);
+        }
     },
     error:function(){
         alert("check the internet!");
@@ -172,16 +233,22 @@ function send(x,y){
             type:"POST",
             url:"http://10.77.70.135:9051/v1/room/dropchess",
             dataType:"JSON",
-            data:{"user_id":{{user_id}},
-                    "room_id":{{room_id}},
+            data:{"user_id":"{{user_id}}",
+                    "room_id":"{{room_id}}",
                     "x":x,
                     "y":y},
             success:function(result){
-                if(who==1){
-                    who=2;
-                }else{
-                    who=1;
-                }
+                $.ajax({
+                    type:"GET",
+                    url:"http://10.77.70.135:9051/v1/room/{{room_id}}/status",
+                    success:function(result){
+                        update(result['data']['chess_board']);
+                        who=result['data']['turn'];
+                    },
+                    error:function(){
+                        alert("check the internet!");
+                    }
+                });
             },
             error:function(){
                 alert("check the internet!");

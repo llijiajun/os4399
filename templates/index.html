@@ -570,7 +570,7 @@ function loginf(){
 function signup(){
 	$.ajax({
 		type:"POST",
-		url:"http://127.0.0.1:9051/v1/user/register",
+		url:"http://10.77.70.135:9051/v1/user/register",
 		dataType:"JSON",
 		data:{"username":$("#sign-username").val()},
 		success:function(result){
